@@ -36,6 +36,20 @@ async function getWorkspacesFilesData(
   return workspacesFiles;
 }
 
+// Remove leading and trailing /
+function getNormalizedUserRoute(userRoute: string): string {
+  let result = userRoute;
+
+  if(userRoute.startsWith('/')){
+    result = result.substring(1)
+  }
+  if(userRoute.endsWith('/')){
+    result = result.substring(0,result.length - 1 )
+  }
+
+  return result;
+}
+
 const findFilePath = ({
   userRoute,
   workspacesFilesData,
@@ -80,8 +94,7 @@ export async function navigateToRoute() {
     return;
   }
 
-  const formattedUserRoute = userRoute.replace("/", "");
-  const foundPath = findFilePath({ userRoute: formattedUserRoute, workspacesFilesData });
+  const foundPath = findFilePath({ userRoute: getNormalizedUserRoute(userRoute), workspacesFilesData });
 
   if (!foundPath) {
     vscode.window.showInformationMessage("Route not found");

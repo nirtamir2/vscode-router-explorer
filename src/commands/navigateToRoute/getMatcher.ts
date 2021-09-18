@@ -25,15 +25,16 @@ function isFallbackRouteFile(fileName: string) {
 
 function getIndexFileRegexp(file: globby.Entry) {
   const filePathWithoutName = file.path.replace(
-    new RegExp(`/${file.name}\$`),
+    new RegExp(`[\/]?${getFileNameWithoutExtension(file.name)}[\/]?$`),
     ""
   );
-  return pathToRegexp(filePathWithoutName.replace(GLOBAL_BOX_REGEXP, ":param"));
+  const regexp = pathToRegexp(filePathWithoutName.replace(GLOBAL_BOX_REGEXP, ":param"));
+  return regexp;
 }
 
 function getFallbackRouterRegexp(file: globby.Entry) {
   const filePathWithoutName = file.path.replace(
-    new RegExp(`/${file.name}\$`),
+    new RegExp(`[\/]?${getFileNameWithoutExtension(file.name)}[\/]?$`),
     ""
   );
 
