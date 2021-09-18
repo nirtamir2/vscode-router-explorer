@@ -49,10 +49,9 @@ const findFilePath = ({
     });
 
     for (const fileMatcher of filesWithMatchers) {
-      console.log(fileMatcher.matcher.regexp);
+      console.log(fileMatcher.matcher);
       if (userRoute.match(fileMatcher.matcher.regexp)) {
         const filePath = fileMatcher.file.absolutePath;
-        console.log(filePath);
         return filePath;
       }
     }

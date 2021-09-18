@@ -1,11 +1,17 @@
 import * as globby from "globby";
 import { pathToRegexp } from "path-to-regexp";
 
+enum MatcherType {
+  Index = "Index",
+  Fallback = "Fallback",
+  Regular = "Regular",
+}
+
 // a[bbb]c -> [bbb]
-const GLOBAL_BOX_REGEXP = /\[([\d\w])+]/g;
+const GLOBAL_BOX_REGEXP = /\[([\s\S])+]/g;
 
 function getFileNameWithoutExtension(fileName: string) {
-  return fileName.split(".").pop() ?? "";
+  return fileName.replace(/\.[\s\S]+$/, "");
 }
 
 function isIndexFile(fileName: string) {
@@ -14,7 +20,7 @@ function isIndexFile(fileName: string) {
 
 // [...fallbackRout]
 function isFallbackRouteFile(fileName: string) {
-  return getFileNameWithoutExtension(fileName).match(/^\[\.{3}([\d\w])+]$/);
+  return getFileNameWithoutExtension(fileName).match(/^\[\.{3}([\s\S])+]$/);
 }
 
 function getIndexFileRegexp(file: globby.Entry) {
@@ -39,28 +45,30 @@ function getFallbackRouterRegexp(file: globby.Entry) {
 }
 
 function getRegularPathRegexp(file: globby.Entry) {
-
   const parameterizedPath = file.path.replace(GLOBAL_BOX_REGEXP, ":param");
-  const regexp = pathToRegexp(parameterizedPath, undefined)
-  return regexp
+  const regexp = pathToRegexp(parameterizedPath, undefined);
+  return regexp;
 }
 
-export function getMatcher(file: globby.Entry): { regexp: RegExp; type: string } {
+export function getMatcher(file: globby.Entry): {
+  regexp: RegExp;
+  type: MatcherType;
+} {
   if (isIndexFile(file.name)) {
     return {
-      type: "index",
+      type: MatcherType.Index,
       regexp: getIndexFileRegexp(file),
     };
   }
   if (isFallbackRouteFile(file.name)) {
     return {
-      type: "fallback",
+      type: MatcherType.Fallback,
       regexp: getFallbackRouterRegexp(file),
     };
   }
 
   return {
-    type: "regular",
+    type: MatcherType.Regular,
     regexp: getRegularPathRegexp(file),
   };
 }
