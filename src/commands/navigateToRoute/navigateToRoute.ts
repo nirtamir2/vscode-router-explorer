@@ -6,14 +6,7 @@ import * as path from "path";
 import { getMatcher } from "./matchers";
 import { MatcherType } from "./MatcherType";
 import { getNormalizedRoute, isValidNormalizedRoute } from "./userRoute";
-
-function getRootDirName(): string {
-  return (
-    vscode.workspace
-      .getConfiguration("router-explorer")
-      .get<string>("root.directory.name") ?? "pages"
-  );
-}
+import { configuration } from "./configuration";
 
 type InitialFilesData = Array<Array<Entry & { absolutePath: string }>>;
 
@@ -22,7 +15,10 @@ async function getWorkspacesFilesData(
 ): Promise<InitialFilesData> {
   const workspacesFiles = await Promise.all(
     workspaceFolders.map(async (folder) => {
-      const cwd = path.join(folder.uri.fsPath, getRootDirName());
+      const cwd = path.join(
+        folder.uri.fsPath,
+        configuration.getRootDirectoryName()
+      );
       const globbyResult = await globby("**/*.{ts,tsx,js,jsx,vue}", {
         cwd,
         objectMode: true,
