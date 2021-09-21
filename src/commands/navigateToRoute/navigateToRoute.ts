@@ -4,7 +4,8 @@ import * as globby from "globby";
 import { Entry } from "globby";
 import * as path from "path";
 import { validateUserRoute } from "./validateUserRoute";
-import { getMatcher, MatcherType } from "./getMatcher";
+import { getMatcher } from "./matchers";
+import { MatcherType } from "./MatcherType";
 
 const rootDirName = "pages";
 
@@ -16,7 +17,7 @@ async function getWorkspacesFilesData(
   const workspacesFiles = await Promise.all(
     workspaceFolders.map(async (folder) => {
       const cwd = path.join(folder.uri.fsPath, rootDirName);
-      const globbyResult = await globby("**/*.{ts,tsx,js,jsx}", {
+      const globbyResult = await globby("**/*.{ts,tsx,js,jsx,vue}", {
         cwd,
         objectMode: true,
       });
