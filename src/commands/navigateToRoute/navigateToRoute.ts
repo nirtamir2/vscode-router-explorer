@@ -3,9 +3,9 @@ import { WorkspaceFolder } from "vscode";
 import * as globby from "globby";
 import { Entry } from "globby";
 import * as path from "path";
-import { validateUserRoute } from "./validateUserRoute";
 import { getMatcher } from "./matchers";
 import { MatcherType } from "./MatcherType";
+import { getNormalizedRoute, isValidNormalizedRoute } from "./userRoute";
 
 const rootDirName = "pages";
 
@@ -35,20 +35,6 @@ async function getWorkspacesFilesData(
     })
   );
   return workspacesFiles;
-}
-
-// Remove leading and trailing /
-function getNormalizedUserRoute(userRoute: string): string {
-  let result = userRoute;
-
-  if (userRoute.startsWith("/")) {
-    result = result.substring(1);
-  }
-  if (userRoute.endsWith("/")) {
-    result = result.substring(0, result.length - 1);
-  }
-
-  return result;
 }
 
 function getMatcherScore(matcherType: MatcherType) {
@@ -92,6 +78,14 @@ const findFilePath = ({
   }
 };
 
+const validateInput = function (text: string): string | undefined {
+  const normalizedRoute = getNormalizedRoute(text);
+  if (isValidNormalizedRoute(normalizedRoute)) {
+    return undefined;
+  }
+  return "Invalid url";
+};
+
 export async function navigateToRoute() {
   const workspaceFolders = vscode.workspace.workspaceFolders;
 
@@ -103,10 +97,11 @@ export async function navigateToRoute() {
   const workspacesFilesData = await getWorkspacesFilesData(workspaceFolders);
 
   const userRoute = await vscode.window.showInputBox({
-    // title:"Router",
+    title: "Search Route",
+    prompt:
+      "Examples: /api/v2/user/1, localhost:3000/url, github.com/nirtamir2, https://nirtamir.com/blog",
     placeHolder: "/api/v2/user",
-    prompt: "Search Route",
-    validateInput: validateUserRoute,
+    validateInput,
   });
 
   if (!userRoute) {
@@ -115,7 +110,7 @@ export async function navigateToRoute() {
   }
 
   const foundPath = findFilePath({
-    userRoute: getNormalizedUserRoute(userRoute),
+    userRoute: getNormalizedRoute(userRoute),
     workspacesFilesData,
   });
 
