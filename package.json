@@ -17,21 +17,21 @@
     "configuration": {
       "title": "Router Explorer",
       "properties": {
-        "router-explorer.root.dirname": {
+        "router-explorer.root.directory.name": {
           "type": "string",
           "default": "pages",
           "description": "Specify the root directory to search for routes"
         },
-        "router-explorer.search.routes.vue.style": {
+        "router-explorer.search.routes.vue.pattern": {
           "type": "string",
-          "default": "nuxt",
+          "default": "Nuxt",
           "enum": [
-            "next",
-            "nuxt"
+            "Nuxt",
+            "Next"
           ],
           "enumDescriptions": [
-            "Next style - [id].vue [...fallback].vue",
-            "Nuxt style - _id.vue _.vue"
+            "Next style - files are organize like [id].vue [...fallback].vue",
+            "Nuxt style - files are organize like _id.vue _.vue"
           ],
           "description": "Specify which patters it should search for vue files"
         }

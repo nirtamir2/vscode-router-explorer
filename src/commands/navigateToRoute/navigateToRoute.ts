@@ -11,7 +11,7 @@ function getRootDirName(): string {
   return (
     vscode.workspace
       .getConfiguration("router-explorer")
-      .get<string>("root.dirname") ?? "pages"
+      .get<string>("root.directory.name") ?? "pages"
   );
 }
 

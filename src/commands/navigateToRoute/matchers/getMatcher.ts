@@ -8,7 +8,7 @@ function shouldUseNuxtStyleInVueFiles() {
   return (
     vscode.workspace
       .getConfiguration("router-explorer")
-      .get<string>("search.routes.vue.style") === "nuxt"
+      .get<string>("search.routes.vue.pattern") === "Nuxt"
   );
 }
 
