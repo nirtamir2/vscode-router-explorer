@@ -74,7 +74,6 @@
     "webpack-cli": "^4.7.0"
   },
   "dependencies": {
-    "fast-glob": "^3.2.7",
     "globby": "^11.0.4",
     "path-to-regexp": "^6.2.0"
   }
