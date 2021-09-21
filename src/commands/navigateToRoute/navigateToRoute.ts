@@ -45,9 +45,9 @@ async function getWorkspacesFilesData(
 
 function getMatcherScore(matcherType: MatcherType) {
   switch (matcherType) {
-    case MatcherType.Regular:
-      return 1;
     case MatcherType.Index:
+      return 1;
+    case MatcherType.Regular:
       return 2;
     case MatcherType.Fallback:
       return 3;
