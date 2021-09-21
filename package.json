@@ -14,6 +14,16 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Router Explorer",
+      "properties": {
+        "router-explorer.root.dirname": {
+          "type": "string",
+          "default": "pages",
+          "description": "Specify the root directory to search for routes"
+        }
+      }
+    },
     "commands": [
       {
         "command": "router-explorer.navigateToRoute",
