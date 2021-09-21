@@ -1,7 +1,7 @@
 import * as globby from "globby";
 import { pathToRegexp } from "path-to-regexp";
 
-enum MatcherType {
+export enum MatcherType {
   Index = "Index",
   Fallback = "Fallback",
   Regular = "Regular",

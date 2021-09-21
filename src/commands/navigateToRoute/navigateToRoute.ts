@@ -1,10 +1,10 @@
 import * as vscode from "vscode";
+import { WorkspaceFolder } from "vscode";
 import * as globby from "globby";
+import { Entry } from "globby";
 import * as path from "path";
 import { validateUserRoute } from "./validateUserRoute";
-import { getMatcher } from "./getMatcher";
-import { WorkspaceFolder } from "vscode";
-import { Entry } from "globby";
+import { getMatcher, MatcherType } from "./getMatcher";
 
 const rootDirName = "pages";
 
@@ -40,14 +40,29 @@ async function getWorkspacesFilesData(
 function getNormalizedUserRoute(userRoute: string): string {
   let result = userRoute;
 
-  if(userRoute.startsWith('/')){
-    result = result.substring(1)
+  if (userRoute.startsWith("/")) {
+    result = result.substring(1);
   }
-  if(userRoute.endsWith('/')){
-    result = result.substring(0,result.length - 1 )
+  if (userRoute.endsWith("/")) {
+    result = result.substring(0, result.length - 1);
   }
 
   return result;
+}
+
+function getMatcherScore(matcherType: MatcherType) {
+  switch (matcherType) {
+    case MatcherType.Regular:
+      return 1;
+    case MatcherType.Index:
+      return 2;
+    case MatcherType.Fallback:
+      return 3;
+  }
+}
+
+function compareMatcher(a: MatcherType, b: MatcherType): number {
+  return getMatcherScore(a) - getMatcherScore(b);
 }
 
 const findFilePath = ({
@@ -58,9 +73,13 @@ const findFilePath = ({
   workspacesFilesData: InitialFilesData;
 }): string | undefined => {
   for (const filesData of workspacesFilesData) {
-    const filesWithMatchers = filesData.map((file) => {
-      return { file, matcher: getMatcher(file) };
-    });
+    const filesWithMatchers = filesData
+      .map((file) => {
+        return { file, matcher: getMatcher(file) };
+      })
+      .sort((a, b) => {
+        return compareMatcher(a.matcher.type, b.matcher.type);
+      });
 
     for (const fileMatcher of filesWithMatchers) {
       console.log(fileMatcher.matcher);
@@ -94,7 +113,10 @@ export async function navigateToRoute() {
     return;
   }
 
-  const foundPath = findFilePath({ userRoute: getNormalizedUserRoute(userRoute), workspacesFilesData });
+  const foundPath = findFilePath({
+    userRoute: getNormalizedUserRoute(userRoute),
+    workspacesFilesData,
+  });
 
   if (!foundPath) {
     vscode.window.showInformationMessage("Route not found");
