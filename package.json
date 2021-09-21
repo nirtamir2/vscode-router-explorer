@@ -21,6 +21,19 @@
           "type": "string",
           "default": "pages",
           "description": "Specify the root directory to search for routes"
+        },
+        "router-explorer.search.routes.vue.style": {
+          "type": "string",
+          "default": "nuxt",
+          "enum": [
+            "next",
+            "nuxt"
+          ],
+          "enumDescriptions": [
+            "Next style - [id].vue [...fallback].vue",
+            "Nuxt style - _id.vue _.vue"
+          ],
+          "description": "Specify which patters it should search for vue files"
         }
       }
     },
