@@ -27,7 +27,7 @@ function getWithoutLeadingAndTrailingSlash(text: string) {
 }
 
 function isHttpOrHttpsProtocol(userRoute: string) {
-  return userRoute.startsWith("http://") || !userRoute.startsWith("https://");
+  return userRoute.startsWith("http://") || userRoute.startsWith("https://");
 }
 
 export function getNormalizedRoute(userRoute: string) {
