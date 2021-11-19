@@ -19,9 +19,3 @@ jobs:
         with:
           pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
           registryUrl: https://marketplace.visualstudio.com
-#      - name: Publish extension to Open VSX
-#        uses: HaaLeo/publish-vscode-extension@master
-#        with:
-#          pat: ${{ secrets.OPEN_VSX_TOKEN }}
-#          extensionFile: ${{ steps.publishVSMarketplace.outputs.vsixPath }}
-#          packagePath: ''
