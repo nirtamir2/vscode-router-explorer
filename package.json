@@ -1,8 +1,8 @@
 {
   "name": "router-explorer",
-  "displayName": "router explorer",
-  "description": "Easily explore you app routes",
-  "version": "0.0.1",
+  "displayName": "Router Explorer",
+  "description": "Navigate in file-system-based router projects easily",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -17,7 +17,7 @@
     "url": "https://github.com/nirtamir2/vscode-router-explorer.git"
   },
   "author": "Nir Tamir",
-  "publisher": "nirtamir",
+  "publisher": "NirTamir",
   "main": "./dist/extension.js",
   "contributes": {
     "configuration": {
