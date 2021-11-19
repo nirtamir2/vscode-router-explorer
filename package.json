@@ -12,6 +12,11 @@
   "activationEvents": [
     "onCommand:router-explorer.navigateToRoute"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nirtamir2/vscode-router-explorer.git"
+  },
+  "author": "Nir Tamir",
   "publisher": "NirTamir",
   "main": "./dist/extension.js",
   "contributes": {
