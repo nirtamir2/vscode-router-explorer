@@ -1,0 +1,27 @@
+on:
+  push:
+    tags:
+      - "*"
+
+name: Deploy Extension
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16.13.0
+      - run: yarn ci
+      - name: Publish extension to Visual Studio Marketplace
+        uses: HaaLeo/publish-vscode-extension@v0
+        id: publishVSMarketplace
+        with:
+          pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
+          registryUrl: https://marketplace.visualstudio.com
+#      - name: Publish extension to Open VSX
+#        uses: HaaLeo/publish-vscode-extension@master
+#        with:
+#          pat: ${{ secrets.OPEN_VSX_TOKEN }}
+#          extensionFile: ${{ steps.publishVSMarketplace.outputs.vsixPath }}
+#          packagePath: ''

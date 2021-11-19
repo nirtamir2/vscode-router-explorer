@@ -76,7 +76,6 @@
   },
   "dependencies": {
     "globby": "^11.0.4",
-    "path-to-regexp": "^6.2.0",
-    "vsce": "^1.100.1"
+    "path-to-regexp": "^6.2.0"
   }
 }
