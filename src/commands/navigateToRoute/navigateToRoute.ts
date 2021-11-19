@@ -21,7 +21,7 @@ async function getWorkspacesFilesData(
       );
       const globbyResult = await globby("**/*.{ts,tsx,js,jsx,vue}", {
         cwd,
-        objectMode: true,
+        objectMode: true
       });
       return globbyResult.map((result) => {
         const pathWithoutFileExtension = result.path.substring(
@@ -31,7 +31,7 @@ async function getWorkspacesFilesData(
         return {
           ...result,
           path: pathWithoutFileExtension,
-          absolutePath: path.join(cwd, result.path),
+          absolutePath: path.join(cwd, result.path)
         };
       });
     })
@@ -55,9 +55,9 @@ function compareMatcher(a: MatcherType, b: MatcherType): number {
 }
 
 const findFilePath = ({
-  userRoute,
-  workspacesFilesData,
-}: {
+                        userRoute,
+                        workspacesFilesData
+                      }: {
   userRoute: string;
   workspacesFilesData: InitialFilesData;
 }): string | undefined => {
@@ -80,7 +80,7 @@ const findFilePath = ({
   }
 };
 
-const validateInput = function (text: string): string | undefined {
+const validateInput = function(text: string): string | undefined {
   const normalizedRoute = getNormalizedRoute(decodeURI(text));
   if (isValidNormalizedRoute(normalizedRoute)) {
     return undefined;
@@ -103,7 +103,7 @@ export async function navigateToRoute() {
     prompt:
       "Examples: /api/v2/user/1, localhost:3000/url, github.com/nirtamir2, https://nirtamir.com/blog",
     placeHolder: "/api/v2/user",
-    validateInput,
+    validateInput
   });
 
   if (!userRoute) {
@@ -113,14 +113,16 @@ export async function navigateToRoute() {
 
   const foundPath = findFilePath({
     userRoute: getNormalizedRoute(userRoute),
-    workspacesFilesData,
+    workspacesFilesData
   });
 
   if (!foundPath) {
     vscode.window.showInformationMessage("Route not found");
     return;
   }
-  vscode.window.showInformationMessage(foundPath);
+  if (configuration.isDebugMessages()) {
+    vscode.window.showInformationMessage(foundPath);
+  }
 
   const textDocument = await vscode.workspace.openTextDocument(foundPath);
   await vscode.window.showTextDocument(textDocument);

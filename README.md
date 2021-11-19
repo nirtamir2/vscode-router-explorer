@@ -37,6 +37,9 @@ Specify which patters it should search for vue files
 - Nuxt style - files are organized like `_id.vue` `_.vue` (
   like https://nuxtjs.org/docs/features/file-system-routing#dynamic-pages). This is the default
 
+`router-explorer.debug.messages.path`:
+Enable route path debug messages
+
 ## Demo
 
 ![demo](https://raw.githubusercontent.com/nirtamir2/vscode-router-explorer/main/docs/full-page-demo.gif)

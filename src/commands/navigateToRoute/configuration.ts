@@ -5,6 +5,7 @@ const rootProperty = "router-explorer";
 export enum ConfigurationProperty {
   SearchPatternInVueFiles = "search.routes.vue.pattern",
   RootDirectoryName = "root.directory.name",
+  ShowDebugMessage = "debug.messages",
 }
 
 export enum SearchPattern {
@@ -35,7 +36,15 @@ function getSearchPatternInVueFiles(): SearchPattern {
   );
 }
 
+function isDebugMessages(): boolean {
+  return getConfigurationProperty(
+    ConfigurationProperty.ShowDebugMessage,
+    process.env.NODE_ENV === "development"
+  );
+}
+
 export const configuration = {
   getRootDirectoryName,
   getSearchPatternInVueFiles,
+  isDebugMessages
 };

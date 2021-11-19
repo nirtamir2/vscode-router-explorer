@@ -28,6 +28,11 @@
           "default": "pages",
           "description": "Specify the root directory to search for routes"
         },
+        "router-explorer.debug.messages": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable route path debug messages"
+        },
         "router-explorer.search.routes.vue.pattern": {
           "type": "string",
           "default": "Nuxt",
