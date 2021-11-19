@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16.13.0
-      - run: yarn ci
+      - run: rm -rf node_modules && yarn install --frozen-lockfile
       - name: Publish extension to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v0
         id: publishVSMarketplace
