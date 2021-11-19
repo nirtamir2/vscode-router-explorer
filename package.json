@@ -17,7 +17,7 @@
     "url": "https://github.com/nirtamir2/vscode-router-explorer.git"
   },
   "author": "Nir Tamir",
-  "publisher": "NirTamir",
+  "publisher": "nirtamir",
   "main": "./dist/extension.js",
   "contributes": {
     "configuration": {
