@@ -4,7 +4,7 @@ This extension helps navigate in file-system based router projects easily.
 
 It's useful if you are using frameworks like Next.js or Nuxt.js.
 
-![demo](./docs/zoomed-demo.gif)
+![demo](https://raw.githubusercontent.com/nirtamir2/vscode-router-explorer/main/docs/zoomed-demo.gif)
 
 ## The problem it solves
 
@@ -39,4 +39,4 @@ Specify which patters it should search for vue files
 
 ## Demo
 
-![demo](./docs/full-page-demo.gif)
+![demo](https://raw.githubusercontent.com/nirtamir2/vscode-router-explorer/main/docs/full-page-demo.gif)
