@@ -4,6 +4,8 @@ This extension helps navigate in file-system based router projects easily.
 
 It's useful if you are using frameworks like Next.js or Nuxt.js.
 
+![demo](./docs/zoomed-demo.gif)
+
 ## The problem it solves
 
 When using regular file search in VSCode, it's inconvenient to navigate to the right page based on URL.
@@ -46,3 +48,7 @@ Specify which patters it should search for vue files
   like https://github.com/hannoeru/vite-plugin-pages)
 - Nuxt style - files are organized like `_id.vue` `_.vue` (
   like https://nuxtjs.org/docs/features/file-system-routing#dynamic-pages). This is the default
+
+## Demo
+
+![demo](./docs/full-page-demo.gif)
