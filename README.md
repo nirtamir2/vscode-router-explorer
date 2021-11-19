@@ -1,71 +1,48 @@
-# router-explorer README
+# Router Explorer VSCode Extension
 
-This is the README for your extension "router-explorer". After writing up a brief description, we recommend including the following sections.
+This extension helps navigate in file-system based router projects easily.
 
-## Features
+It's useful if you are using frameworks like Next.js or Nuxt.js.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## The problem it solves
 
-For example if there is an image subfolder under your extension project workspace:
+When using regular file search in VSCode, it's inconvenient to navigate to the right page based on URL.
 
-\!\[feature X\]\(images/feature-x.png\)
+Most of the time, you have an API endpoint or web URL, and you want to navigate to its source code.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+So you have to figure it out by yourself by looking at your `pages` directory, and open navigate directory after
+directory - to find the right place in the file system.
 
-## Requirements
+We can't infer the right file from the URL without searching in the file system.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Meaning that based on the url, I can create more than one file-system structure that match that url.
+
+Tryings like writing the end of the route may not search the result you want - it can be a parameterized id or
+non-unique.
+
+Most of the time directories are usually parameterized (like `[slug]`) and the files are called `index` or parameterized
+too (`[id].tsx`).
+
+This extension helps you navigate to the source file.
+
+Just paste the URL or path - and it will navigate to the right file for you.
+
+## How to use
+
+- Enter `router explorer` in the command palette.
+  > Examples: /api/v2/user/1, localhost:3000/url, github.com/nirtamir2, https://nirtamir.com/blog
+- Write the url you want to navigate to and press enter.
+- You will be navigated to the matching page component that matches the url (or get an error if the route is not found)
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+`router-explorer.root.directory.name`:
+Specify the root directory to search for routes.
 
-For example:
+`router-explorer.search.routes.vue.pattern`:
+Specify which patters it should search for vue files
 
-This extension contributes the following settings:
-
-- `myExtension.enable`: enable/disable this extension
-- `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-- [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-- Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-- Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+- Next style - files are organized like `[id].vue` `[...fallback].vue` (
+  like https://github.com/hannoeru/vite-plugin-pages)
+- Nuxt style - files are organized like `_id.vue` `_.vue` (
+  like https://nuxtjs.org/docs/features/file-system-routing#dynamic-pages). This is the default
