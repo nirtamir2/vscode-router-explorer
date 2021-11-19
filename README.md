@@ -1,4 +1,4 @@
-# Router Explorer VSCode Extension
+# VSCode Router Explorer
 
 This extension helps navigate in file-system based router projects easily.
 
