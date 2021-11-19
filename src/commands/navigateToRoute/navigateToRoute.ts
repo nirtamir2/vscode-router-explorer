@@ -81,7 +81,7 @@ const findFilePath = ({
 };
 
 const validateInput = function (text: string): string | undefined {
-  const normalizedRoute = getNormalizedRoute(text);
+  const normalizedRoute = getNormalizedRoute(decodeURI(text));
   if (isValidNormalizedRoute(normalizedRoute)) {
     return undefined;
   }

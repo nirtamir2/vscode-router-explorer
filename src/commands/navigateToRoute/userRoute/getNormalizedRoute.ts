@@ -31,9 +31,10 @@ function isHttpOrHttpsProtocol(userRoute: string) {
 }
 
 export function getNormalizedRoute(userRoute: string) {
-  const route = isHttpOrHttpsProtocol(userRoute)
-    ? userRoute
-    : `http://${userRoute}`;
+  const decodedRoute = decodeURI(userRoute);
+  const route = isHttpOrHttpsProtocol(decodedRoute)
+    ? decodedRoute
+    : `http://${decodedRoute}`;
 
   if (isValidHttpUrl(route)) {
     const pathname = new URL(route).pathname;
