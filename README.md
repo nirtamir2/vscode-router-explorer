@@ -8,26 +8,14 @@ It's useful if you are using frameworks like Next.js or Nuxt.js.
 
 ## The problem it solves
 
-When using regular file search in VSCode, it's inconvenient to navigate to the right page based on URL.
-
-Most of the time, you have an API endpoint or web URL, and you want to navigate to its source code.
-
-So you have to figure it out by yourself by looking at your `pages` directory, and open navigate directory after
-directory - to find the right place in the file system.
-
-We can't infer the right file from the URL without searching in the file system.
-
-Meaning that based on the url, I can create more than one file-system structure that match that url.
-
-Tryings like writing the end of the route may not search the result you want - it can be a parameterized id or
-non-unique.
-
-Most of the time directories are usually parameterized (like `[slug]`) and the files are called `index` or parameterized
-too (`[id].tsx`).
-
-This extension helps you navigate to the source file.
-
-Just paste the URL or path - and it will navigate to the right file for you.
+When using regular file search in VSCode, it's inconvenient to navigate to the right page based on URL. Most of the
+time, you have an API endpoint or web URL, and you want to navigate to its source code. So you have to figure it out by
+yourself by looking at your `pages` directory, and open navigate directory after directory - to find the right place in
+the file system. We can't infer the right file from the URL without searching in the file system. Meaning that based on
+the url, I can create more than one file-system structure that match that url. Tryings like writing the end of the route
+may not search the result you want - it can be a parameterized id or non-unique. Most of the time directories are
+usually parameterized (like `[slug]`) and the files are called `index` or parameterized too (`[id].tsx`). This extension
+helps you navigate to the source file. Just paste the URL or path - and it will navigate to the right file for you.
 
 ## How to use
 
