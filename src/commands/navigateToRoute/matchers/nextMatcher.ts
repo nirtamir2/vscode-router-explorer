@@ -8,9 +8,7 @@ const GLOBAL_BOX_REGEXP = /\[([\s\S])+]/g;
 
 function getIndexFileRegexp(file: globby.Entry) {
   const filePathWithoutName = file.path.replace(
-    new RegExp(
-      `[\/]?${FileUtils.getNameWithoutExtension(file.name)}[\/]?$`
-    ),
+    new RegExp(`[\/]?${FileUtils.getNameWithoutExtension(file.name)}[\/]?$`),
     ""
   );
   return pathToRegexp(filePathWithoutName.replace(GLOBAL_BOX_REGEXP, ":param"));
@@ -18,9 +16,7 @@ function getIndexFileRegexp(file: globby.Entry) {
 
 function getFallbackRouterRegexp(file: globby.Entry) {
   const filePathWithoutName = file.path.replace(
-    new RegExp(
-      `[\/]?${FileUtils.getNameWithoutExtension(file.name)}[\/]?$`
-    ),
+    new RegExp(`[\/]?${FileUtils.getNameWithoutExtension(file.name)}[\/]?$`),
     ""
   );
 

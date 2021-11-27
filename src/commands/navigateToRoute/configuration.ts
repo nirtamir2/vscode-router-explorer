@@ -46,5 +46,5 @@ function isDebugMessages(): boolean {
 export const configuration = {
   getRootDirectoryName,
   getSearchPatternInVueFiles,
-  isDebugMessages
+  isDebugMessages,
 };

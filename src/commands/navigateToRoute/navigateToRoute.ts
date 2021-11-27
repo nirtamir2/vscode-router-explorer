@@ -21,7 +21,7 @@ async function getWorkspacesFilesData(
       );
       const globbyResult = await globby("**/*.{ts,tsx,js,jsx,vue}", {
         cwd,
-        objectMode: true
+        objectMode: true,
       });
       return globbyResult.map((result) => {
         const pathWithoutFileExtension = result.path.substring(
@@ -31,7 +31,7 @@ async function getWorkspacesFilesData(
         return {
           ...result,
           path: pathWithoutFileExtension,
-          absolutePath: path.join(cwd, result.path)
+          absolutePath: path.join(cwd, result.path),
         };
       });
     })
@@ -55,9 +55,9 @@ function compareMatcher(a: MatcherType, b: MatcherType): number {
 }
 
 const findFilePath = ({
-                        userRoute,
-                        workspacesFilesData
-                      }: {
+  userRoute,
+  workspacesFilesData,
+}: {
   userRoute: string;
   workspacesFilesData: InitialFilesData;
 }): string | undefined => {
@@ -80,8 +80,8 @@ const findFilePath = ({
   }
 };
 
-const validateInput = function(text: string): string | undefined {
-  const normalizedRoute = getNormalizedRoute(decodeURI(text));
+const validateInput = function (text: string): string | undefined {
+  const normalizedRoute = getNormalizedRoute(text);
   if (isValidNormalizedRoute(normalizedRoute)) {
     return undefined;
   }
@@ -101,9 +101,9 @@ export async function navigateToRoute() {
   const userRoute = await vscode.window.showInputBox({
     title: "Search Route",
     prompt:
-      "Examples: /api/v2/user/1, localhost:3000/url, github.com/nirtamir2, https://nirtamir.com/blog",
+      "Examples: /api/v2/user/1, http://localhost:3000/url, https://nirtamir.com/blog",
     placeHolder: "/api/v2/user",
-    validateInput
+    validateInput,
   });
 
   if (!userRoute) {
@@ -111,9 +111,11 @@ export async function navigateToRoute() {
     return;
   }
 
+  const normalizedRoute = getNormalizedRoute(userRoute);
+
   const foundPath = findFilePath({
-    userRoute: getNormalizedRoute(userRoute),
-    workspacesFilesData
+    userRoute: normalizedRoute,
+    workspacesFilesData,
   });
 
   if (!foundPath) {
