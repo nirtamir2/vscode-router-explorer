@@ -2,7 +2,7 @@
   "name": "router-explorer",
   "displayName": "Router Explorer",
   "description": "Navigate in file-system-based router projects easily",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.60.0"
   },
