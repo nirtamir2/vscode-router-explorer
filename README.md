@@ -20,7 +20,7 @@ helps you navigate to the source file. Just paste the URL or path - and it will 
 ## How to use
 
 - Enter `navigate to route` in the command palette.
-  > Examples: /api/v2/user/1, localhost:3000/url, github.com/nirtamir2, https://nirtamir.com/blog
+  > Examples: /api/v2/user/1, http://localhost:3000/url, https://nirtamir.com/blog
 - Write the url you want to navigate to and press enter.
 - You will be navigated to the matching page component that matches the url (or get an error if the route is not found)
 
